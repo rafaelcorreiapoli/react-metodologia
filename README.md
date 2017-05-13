@@ -301,7 +301,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   de estado será gerenciado pelo nosso client de GraphQL
   Pense apenas em estados locais, como por exemplo qual filtro está selecionado, itens em um carrinho de compras, formulários*, etc
 
-  * Caso você opte por utilizar o `redux-form` (recomendado), você não precisará se preocupar com estado referente à forms.
+  * *Caso você opte por utilizar o `redux-form` (recomendado), você não precisará se preocupar com estado referente à forms.*
 
   Lembra-se quando conversamos sobre estados efêmeros, que não importam para o resto da aplicação? Neste momento, tendo uma visão mais geral do nosso State shape, é a hora
   de decidir quais partes do estado da nossa aplicação podem ser gerenciados localmente no componente e não na store do redux. Por exemplo, se um componente muda de cor
