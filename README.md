@@ -24,7 +24,7 @@ Os passos a seguir fazem parte de um ciclo de desenvolvimento e podem ser aplica
   nos proporcionando praticidade quando formos de fato construir nosso sistema de busca.
 
 ## 1.2 Stateless!
-  Todos estes componentes deverão ser stateless. Para garantir isto, iremos utilizar a sintaxe React Functional Stateless Component:
+  Todos os componentes nesta fase **deverão** ser stateless. Para garantir isto, iremos utilizar a sintaxe para declara componentes com funções (React Functional Stateless Component):
   ```js
     const SearchInput = () => (
       ...
@@ -163,6 +163,98 @@ Os passos a seguir fazem parte de um ciclo de desenvolvimento e podem ser aplica
    - Poderá alternar entre os diferentes casos de uso de maneira rápida
    - Irá gerar um catálogo de componentes que será útil para você no futuro e para sua equipe
    - Irá garantir que o componente está chamando corretamente as funções (emitindo os eventos necessários e com os parâmetros corretos)
+
+Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar sobre estilização
+
+  ## 2.2 Estilização
+
+  Há diversas formas de fazer estilização com React, mas para esta metodologia iremos utilizar a biblioteca `styled-components`
+  Primeiro, escreva a **estrutura** do seu componente, sem se preocupar com css:
+
+  ```js
+  import Input from '@components/InputWrapper'
+  import SearchIcon from '@components/SearchIcon'
+  import ResultsCountChip from '@components/ResultsCountChip'
+  import styled from 'styled-components'
+
+  const Container = styled.div`
+    /*styles aqui */
+  `
+  const InputWrapper = styled.div`
+    /*styles aqui */
+  `
+
+  const CancelButton = styled.button`
+    /*styles aqui */
+  `
+  const SearchInput = ({
+      // estado
+      text,
+      resultsCount,
+      hovered,
+      resultsCount,
+      // eventos
+      onChangeText,
+      onClickCancel,
+      onHover,
+      onMouseLeave,
+  }) => (
+    <Container onMouseEnter={onHover} onMouseLeave={onMouseLeave}>
+      <InputWrapper>
+        <Input value={text} onChange={e => onChangeText(e.target.value)} />
+      </InputWrapper>
+      <SearchIcon active={hovered} />
+      <ResultsCountChip count={resultsCount}/>
+      <CancelButton onClick={onClickCancel} resultsCount={resultsCount} />
+    </Container>
+  )
+  ```
+
+  Repare que `Container` e `InputWrapper` são componentes locais, criados utilizado o hoc `Styled` (styled.div é apenas um alias para Styled('div'))
+  A partir de agora é só estilizar. Propriedades de css que são calculadas a partir de props são facilmente implementadas utilizando interpolação de strings:
+  ```js
+  const CancelButton = styled.button`
+    height: 50px;
+    width: 200px;
+    background-color: ${props => props.resultsCount > 0  ? '#F00' : '#0F0'};
+  `
+  ```
+
+  O único caso em que iremos declarar classes diretamente no css é caso precisemos utilizar o ReactCSSTransitionGroup, que depende de classes globais.
+  Fora isso, todo o estilo estará escopado por componente, fazendo com que ele se torne verdadeiramente um componente autosuficiente, que irá se comportar da mesma maneira
+  independente do contexto em que for inserido.
+  Algumas vantagens em utilizar o styled-components
+   - É muito mais fácil calcular estilos condicionais desta maneira do que com classes
+   - O estilo fica escopado para o componente, evitando estilos globais
+   - Diferentemente de Inline-Styles, é possível utilizar outros recursos de css como media-queries e pseudo-seletores
+
+  E como reaproveitaremos estilos?
+    Diferentemente do CSS convencional, **não criaremos estilos globais** para reaproveitá-los. O que faremos é o reaproveitamnete de Components
+    Vamos supor que todos nossos componentes de texto tenham estas propriedades
+    ```
+      color: #FFF;
+      font-size: 16px;
+      font-family: Nunito Sans;
+    ```
+    Ao invez de criarmos uma classe global ou mesmo aplicar estes estilos em um escopo ainda mais genérico (body, por exemplo), iremos criar um componente Text
+
+    ```js
+      const Text = styled.span`
+      color: #FFF;
+      font-size: 16px;
+      font-family: Nunito Sans;
+      `
+    ```
+
+    E sempre que precisarmos destas características, importaremos o componente `Text`e o utilizaremos.
+    E caso precisemos criar componentes que tem como base as características de `Text`, porém com customizações? É simples
+    ```js
+      const Title = styled(Text)`
+        font-weight: 900;
+        font-size: 26px;
+      `
+    ```
+
 
 Daqui pra baixo é rascunho:
 ## Layout
