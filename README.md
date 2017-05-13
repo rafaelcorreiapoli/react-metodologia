@@ -237,7 +237,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
    estilos em um escopo ainda mais genérico (body, por exemplo), iremos criar um componente Text
 
    ```css
-     color: #FFF;
+     color: red;
      font-size: 16px;
      font-family: Nunito Sans;
    ```
