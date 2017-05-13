@@ -229,38 +229,37 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
    - Diferentemente de Inline-Styles, é possível utilizar outros recursos de css como media-queries e pseudo-seletores
 
   E como reaproveitaremos estilos?
-    Diferentemente do CSS convencional, **não criaremos estilos globais** para reaproveitá-los.
-    O que faremos é o reaproveitamnete de Components
-    Vamos supor que todos nossos componentes de texto tenham estas propriedades
-
-
-    Ao invez de criarmos uma classe global ou mesmo aplicar estes
-    estilos em um escopo ainda mais genérico (body, por exemplo), iremos criar um componente Text
-
-    ```jsx
-      color: #FFF;
-      font-size: 16px;
-      font-family: Nunito Sans;
-    ```
-
-    ```jsx
-      const Text = styled.span`
-        color: #FFF;
-        font-size: 16px;
-        font-family: Nunito Sans;
-        `
-    ```
-
-    E sempre que precisarmos destas características, importaremos o componente `Text`e o utilizaremos.
-    E caso precisemos criar componentes que tem como base as características de `Text`,
-    porém com customizações? É simples
+   Diferentemente do CSS convencional, **não criaremos estilos globais** para reaproveitá-los.
+   O que faremos é o reaproveitamnete de Components
+   Vamos supor que todos nossos componentes de texto tenham estas propriedades
     
-    ```jsx
-      const Title = styled(Text)`
-        font-weight: 900;
-        font-size: 26px;
-        `
-    ```
+   Ao invez de criarmos uma classe global ou mesmo aplicar estes
+   estilos em um escopo ainda mais genérico (body, por exemplo), iremos criar um componente Text
+
+   ```jsx
+     color: #FFF;
+     font-size: 16px;
+     font-family: Nunito Sans;
+   ```
+
+   ```jsx
+     const Text = styled.span`
+       color: #FFF;
+       font-size: 16px;
+       font-family: Nunito Sans;
+       `
+   ```
+
+   E sempre que precisarmos destas características, importaremos o componente `Text`e o utilizaremos.
+   E caso precisemos criar componentes que tem como base as características de `Text`,
+   porém com customizações? É simples
+    
+   ```jsx
+     const Title = styled(Text)`
+       font-weight: 900;
+       font-size: 26px;
+      `
+   ```
 
 
 Daqui pra baixo é rascunho:
