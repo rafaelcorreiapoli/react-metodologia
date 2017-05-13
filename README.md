@@ -250,7 +250,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
 
     E sempre que precisarmos destas características, importaremos o componente `Text`e o utilizaremos.
     E caso precisemos criar componentes que tem como base as características de `Text`, porém com customizações? É simples
-    
+
     ```js
       const Title = styled(Text)`
         font-weight: 900;
@@ -258,31 +258,126 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
       `
     ```
 
-
-Daqui pra baixo é rascunho:
-## Layout
- - Analisar layout e definir componentes visuais
- - Definir props dos componentes para eles assumirem os estados
-
-## Storybook
- -> TDD: Escreva as estórias e teste visualmente os componentes
- -> Escrever os compoenntes
-
- ## Desenhar o estado
-  - Escrever JSOn que representa o seu state
-  - Entender quais são os estados que podem ser guardados localmente (não importam pro resto do app, ex: hover)
-  - Nujnca guardar estado computado
-
-
-## Routes
-  - Criar rotas e paginas
-
-## Container
-  mapStateToProps: {
-    result : state.a * state.b
+## 3. Routes e Pages
+  Neste momento teremos todos os componentes visuais criados, testados e documentados,
+  apenas esperando para receber os dados e funções vindas dos containers.
+  Porém há alguns passos antes de chegarmos no que propriamente vai ditar a lógica da nossa aplicação
+  Nesta fase, criaremos as rotas envolvidas nesta iteração utilizado o `react-router v4`
+  Criaremos também uma outra categoria de componentes: as `Pages`
+  Nossas routes irão sempre desenhar Pages, e por mais que a Page tenha apenas um componente (um Container, por exemplo), é importante criar esta camada.
+  A vantagem é que, criando esta interface entre o container e a rota, não estaremos acoplando o nosso container com como a rota trata os params da rota, por exemplo
+  ```js
+  const SearchPage = ({
+    match: {
+      params: {
+        categoryId
+      }
+    }
+  }) => {
+    return (
+      <SearchContainer
+        categoryIdFilter={categoryId}
+      />
+    )
   }
-  mapDispatchToProps: {
+  ```
+  Neste exemplo nosso `SearchContainer` recebe o categoryId, e no nosso caso de uso este categoryId está na rota (por exemplo `/search/:categoryId`)
+  O papel do `SearchPage`, neste caso, é ler do match.params (específico do nosso Router) o categoryId e repassar para o componente.
+  Sendo assim, nosso 'SearchContainer' não está atrelado a nosso Router e pode ser utilizado em outros contextos, por exemplo com o categoryId vindo de outra fonte de dados
 
+
+## 4. State shape
+  Neste passo, iremos analisar as funcionalidades e casos de uso para determinar o **mínimo** que devemos guardar na nossa store para representar o estado da aplicação
+  Por que **mínimo** ? Não devemos guardar valores computados, pois estes devem ser calculados e repassados para os componentes nos Containers. Veremos mais sobre este assunto
+  no tópico sobre Containers.
+  Mas, para exemplificar, vamos imaginar que estamos fazendo uma calculadora que mostra o resultado da multiplicação de dois números, o número **a** e o número **b**
+  O resultado da multiplicação, que chamaremos de  **c**, não precisa e não deve ser guardado na nossa store, pois ele é um valor computado a partir de outros valores,
+  no caso, **c = a * b**
+  Nesta fase, não devemos nos preocupar com o estado referente à dados buscados do backend (por exemplo os posts do usuário) pois, como veremos a seguir, este tipo
+  de estado será gerenciado pelo nosso client de GraphQL
+  Pense apenas em estados locais, como por exemplo qual filtro está selecionado, itens em um carrinho de compras, formulários*, etc
+
+  * Caso você opte por utilizar o `redux-form` (recomendado), você não precisará se preocupar com estado referente à forms.
+
+  Lembra-se quando conversamos sobre estados efêmeros, que não importam para o resto da aplicação? Neste momento, tendo uma visão mais geral do nosso State shape, é a hora
+  de decidir quais partes do estado da nossa aplicação podem ser gerenciados localmente no componente e não na store do redux. Por exemplo, se um componente muda de cor
+  ao sofrer um hover e nenhum outro componente do nosso app precisa ficar sabendo disto, encontramos um bom estado candidato a ser transferido para um estado local
+  Porém não queremos modificar nossos componentes stateless criados na primeira fase (transformando-os em classes, capazes de ter estado)
+  Para resolver este problema, utilizaremos a biblioteca `recompose`, criando `enhancers` que darão capacidade a nossos componentes de terem um estado
+  ```js
+  const enhanceWithHover = withState('hovered', 'setHovered', false)
+  const withHandlers = ({
+    onMouseOver: ({ setHover }) => () => setHover(true)
+    onMouseOut: ({ setHover }) => () => setHover(false)
+  })
+
+  const SearchInputWithHover = enhanceWithHover(SearchInput)
+  ```
+  Pronto, agora nosso componente `SearchInputWithHover` é um `SearchInput` mas com capacidades de gerenciar e modificar seu estado em relação ao hover (:
+
+
+## 5. GraphQL
+  Esta é a parte mais fascinante e satisfatória da metodologia, onde veremos nossos componentes recebendo dados reais vindos por exemplo do nosso backend
+  Utilizaremos o `Apollo` como client de GraphQL.
+
+  ## 5.1 Queries
+  Provavelmente, os componentes de lista de Todos (TodoList) que desenhamos na primeira fase estão esperando um array de objetos Todo.
+  É bem fácil popular uma lista dessa com um client de GraphQL
+  ```js
+  const query = gql`
+    query todos {
+      todos {
+        id
+        name
+        done
+        tag {
+          color
+        }
+      }
+    }
+  `
+
+  const ListWithData = graphql(query)(TodoList) //*
+  ```
+  OBS: *O componente ListWithData é considerado um `Container`, mas não é um `Container` completo para nossa aplicação pois ele não interage com o estado local,
+  no tópico sobre containers, iremos completar a metade que falta deste componente para que ele possa, através do connect do redux, receber props que estão guardadas
+  no estado local (mapStateToProps) e poder dispachar ações que modifiquem o estado local (mapDispatchToProps)*
+
+  O ideal é que o componente esteja esperando exatamente o mesmo formato de dados que está descrito na nossa schema de GraphQL
+  Caso precise tratar os dados antes de passá-los para o componente, utilize as `queryOptions` do Apollo.
+  Por exemplo, supondo que nosso componente TechnologiesList e TechnologiesListItem esperem que a cor esteja na raiz do objeto de tecnologia
+  (eles não sabem da existência da key `tag`), podemos tratar os dados da seguinte maneira:
+  ```js
+  const queryOptions = {
+    props: ({ ownProps, data: { loading, todos, refetch } }) => ({
+      loading,
+      refetch,
+      todos: todos && todos.map(todo => ({
+        ...todo,
+        color: todo.tag.color,
+      }))
+    }),
   }
-  - Estados derivados: usar memoization (por exemplo lib reselect)
-  - ORGASMO!
+  ```
+
+  É recomendado também o uso de `fragments` para evitar repetição. *(Mais sobre este tópico no futuro)*
+  O `Apollo` será responsável por trazer para o client todos os dados que necessários e que estejam necessariamente no backend (não são dados de estado local,
+  como por exemplo qual filtro está selecionado)
+
+  ## 5.2 Mutations
+  Todas as operações (create, remove, update, etc) que precisem ser feitas no servidor serão disparadas pelo client
+  através de mutations *(Mais sobre este tópico no futuro)
+
+  Algumas vantagens de usar GraphQL + Apollo ao invez de modelos mais convenciais como por exemplo REST:
+  - Você pode consultar os dados da maneira que quiser, especificando as relations e quais campos quer de cada objeto
+  - Caching
+  - É declarativo, consistente com todo o resto do nosso ambiente
+  - Do lado do backend, não é necessário criar novos endpoints para construção de diferentes visualizações no front
+  - Temos uma documentação completa do que pode ser explorado no nosso backend (ferramentas como GraphiQL irão ajudar muito)
+  - etc...
+
+
+## 6. Actions e Reducers
+  *Em breve...*
+## 7. Containers
+  *Em breve...*
