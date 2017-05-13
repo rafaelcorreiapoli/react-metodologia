@@ -232,7 +232,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
     Diferentemente do CSS convencional, **não criaremos estilos globais** para reaproveitá-los. O que faremos é o reaproveitamnete de Components
     Vamos supor que todos nossos componentes de texto tenham estas propriedades
 
-    ```
+    ```js
       color: #FFF;
       font-size: 16px;
       font-family: Nunito Sans;
@@ -245,7 +245,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
         color: #FFF;
         font-size: 16px;
         font-family: Nunito Sans;
-      `
+        `
     ```
 
     E sempre que precisarmos destas características, importaremos o componente `Text`e o utilizaremos.
@@ -255,7 +255,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
       const Title = styled(Text)`
         font-weight: 900;
         font-size: 26px;
-      `
+        `
     ```
 
 
