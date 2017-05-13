@@ -236,7 +236,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
    Ao invez de criarmos uma classe global ou mesmo aplicar estes
    estilos em um escopo ainda mais genérico (body, por exemplo), iremos criar um componente Text
 
-   ```jsx
+   ```css
      color: #FFF;
      font-size: 16px;
      font-family: Nunito Sans;
