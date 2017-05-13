@@ -238,25 +238,6 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
       font-family: Nunito Sans;
     ```
 
-    Ao invez de criarmos uma classe global ou mesmo aplicar estes estilos em um escopo ainda mais genérico (body, por exemplo), iremos criar um componente Text
-
-    ```js
-      const Text = styled.span`
-        color: #FFF;
-        font-size: 16px;
-        font-family: Nunito Sans;
-        `
-    ```
-
-    E sempre que precisarmos destas características, importaremos o componente `Text`e o utilizaremos.
-    E caso precisemos criar componentes que tem como base as características de `Text`, porém com customizações? É simples
-    
-    ```js
-      const Title = styled(Text)`
-        font-weight: 900;
-        font-size: 26px;
-        `
-    ```
 
 
 Daqui pra baixo é rascunho:
