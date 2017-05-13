@@ -262,7 +262,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
     `
   ```
 
-## 3. Routes e Pages
+# 3. Routes e Pages
   Neste momento teremos todos os componentes visuais criados, testados e documentados,
   apenas esperando para receber os dados e funções vindas dos containers.
   Porém há alguns passos antes de chegarmos no que propriamente vai ditar a lógica da nossa aplicação
@@ -290,7 +290,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   Sendo assim, nosso 'SearchContainer' não está atrelado a nosso Router e pode ser utilizado em outros contextos, por exemplo com o categoryId vindo de outra fonte de dados
 
 
-## 4. State shape
+# 4. State shape
   Neste passo, iremos analisar as funcionalidades e casos de uso para determinar o **mínimo** que devemos guardar na nossa store para representar o estado da aplicação
   Por que **mínimo** ? Não devemos guardar valores computados, pois estes devem ser calculados e repassados para os componentes nos Containers. Veremos mais sobre este assunto
   no tópico sobre Containers.
@@ -320,7 +320,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   Pronto, agora nosso componente `SearchInputWithHover` é um `SearchInput` mas com capacidades de gerenciar e modificar seu estado em relação ao hover (:
 
 
-## 5. GraphQL
+# 5. GraphQL
   Esta é a parte mais fascinante e satisfatória da metodologia, onde veremos nossos componentes recebendo dados reais vindos por exemplo do nosso backend
   Utilizaremos o `Apollo` como client de GraphQL.
 
@@ -368,7 +368,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   O `Apollo` será responsável por trazer para o client todos os dados que necessários e que estejam necessariamente no backend (não são dados de estado local,
   como por exemplo qual filtro está selecionado)
 
-  ## 5.2 Mutations
+  # 5.2 Mutations
   Todas as operações (create, remove, update, etc) que precisem ser feitas no servidor serão disparadas pelo client
   através de mutations *(Mais sobre este tópico no futuro)
 
