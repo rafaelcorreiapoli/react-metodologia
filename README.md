@@ -1,15 +1,26 @@
-# Metodologia projetos React
+# Metodologia para projetos React (web e native)
 Uma metodologia que estou desenvolvendo com base em aprendizados nos diversos projetos que realizei.
 
-As estratégias seguidas neste modelo também são fruto de muitas pesquisas e intenso uso de bibliotecas modernas, seguindo todas as melhores práticas de desenvolvimento web moderno.
+As estratégias seguidas neste modelo também são fruto de muitas pesquisas e se baseiam no uso de bibliotecas modernas, seguindo todas as melhores práticas de desenvolvimento web moderno.
 
 Os passos a seguir fazem parte de um ciclo de desenvolvimento e podem ser aplicados de uma vez para o projeto todo ou subdivindo o projeto em pequenas entregas (iterações)
+
+
+# Overview
+Seguiremos uma série de passos tendo como objetivo o desenvolvimento de uma determinada funcionalidade para nosso software.
+A imagem a seguir mostra uma visão macro do processo. Nela, assumimos que a equipe está utilizando o SCRUM como framework
+de desenvolvimento de projeto.
+
+Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos em de antemão uma lista de tarefas/funcionalidades a serem desenvolvidas nesta iteração.
+
+[imagem]
+
 
 # 1. Componentes Visuais
 
 ## 1.1 Divisão de componentes visuais (stateless/dumb components)
-  Tendo em mãos os wireframes que contenham todos os elementos e funcionalidades que serão desenvolvidos nesta iteração, iremos realizar o trabalho de dividir tudo em componentes visuais.
-  É nesta hora que vamos estabelecer componentes como:
+  Tendo em mãos os wireframes/mockups que contenham todos os elementos (e a representação de suas funcionalidades) que serão desenvolvidos nesta iteração, iremos realizar a divisão deles em componentes visuais.
+  É nesta hora que iremos estabelecer componentes como:
   - SearchInput
   - TodoList
   - TodoListItem
@@ -18,28 +29,34 @@ Os passos a seguir fazem parte de um ciclo de desenvolvimento e podem ser aplica
   - etc...
 
   Procuraremos estabelecer um nível de granularidade que evite completamente repetições (DRY) mas ao mesmo tempo tenha foco em praticidade.
-  Por exemplo, nosso input de busca pode ter diversos elementos (um input *(1)*, um icone de search *(2)*, um chip com a quantidade de resultados *(3)* e um botão de cancel *(4)*)
-  Cada um destes (*1*, *2*, *3*, *4*), apesar de bem granulares, merecem ser um componente. Com isto, conseguiremos reutilizar estes mesmos elementos em outros contextos, caso seja preciso.
-  Mas não deixaremos de criar o componente SearchInput, que é um componente que desenha e organiza os subcomponente *1*, *2*, *3*, *4*,
-  nos proporcionando praticidade quando formos de fato construir nosso sistema de busca.
+  Por exemplo, nosso input de busca pode ter diversos elementos:
+    - Icone de search **(1)**.
+    - Input **(2)**.
+    - Chip com a quantidade de resultados **(3)**.
+    - Botão de cancel **(4)**.
 
-## 1.2 Stateless!
-  Todos os componentes nesta fase **deverão** ser stateless. Para garantir isto, iremos utilizar a sintaxe para declara componentes com funções (React Functional Stateless Component):
+  Cada um destes (**1**, **2**, **3**, **4**), apesar de bem granulares, merecem ser um componente.
+  Com isto, conseguiremos reutilizar estes mesmos elementos em outros contextos, caso seja preciso.
+  Mas não deixaremos de criar o componente SearchInput, que é um componente que desenha e organiza os subcomponente **1**, **2**, **3**, **4**, nos proporcionando praticidade quando formos de fato construir nosso sistema de busca.
+
+## 1.2 Stateless
+  Todos os componentes nesta fase **deverão** ser stateless. Para garantir isto, iremos utilizar a sintaxe para declarar componentes com funções (React Functional Stateless Component):
   ```js
     const SearchInput = () => (
       ...
     )
   ```
   Isto irá nos proporcionar algumas vantagens:
-  - Iremos garantir que os componentes desenvolvidos nesta etapa não terão estado próprio, nos forçando a guardar o estado na nossa Store do Redux (single source of truth)
-  - A sintaxe é menos verbosa que ES6 classes
-  - Componentes stateless são mais fáceis de serem compreendidos e utilizados
+  - Iremos garantir que os componentes desenvolvidos nesta etapa não terão estado próprio, nos forçando a guardar o estado na nossa Store do Redux (single source of truth).
+  - A sintaxe é menos verbosa que ES6 classes.
+  - Componentes stateless são mais fáceis de serem compreendidos e utilizados.
 
 ## 1.2 Props
-  É neste momento também que estabeleceremo, olhando para nossas funcionalidades e wireframes, quais Props cada stateless component irá receber.
-  Neste momento, não economize em props: Absolutamente *todos*
+  É neste momento também que estabeleceremos, olhando para nossos wireframes/mockups, quais Props cada stateless component irá receber.
+  Neste momento, não economize em props: Absolutamente **todos**
   os parâmetros que descrevem o estado do componente e os eventos que ele pode emitir devem ser levados
-  em consideração. Até mesmo estados "superficiais" como por exemplo Hover (Veremos nos próximos tópicos como otimizá-los)
+  em consideração. Até mesmo estados "superficiais" como por exemplo *hover* (Veremos nos mais adiante como otimizá-los)
+
   ```js
     const SearchInput = ({
         // estado
@@ -55,9 +72,10 @@ Os passos a seguir fazem parte de um ciclo de desenvolvimento e podem ser aplica
       ...
     )
   ```
+
   ### 1.2.1 propTypes
   É de extrema importância que sejam escritos os PropTypes. Eles nos ajudaram em diversos pontos:
-  - Servirão de documentação para o componente. Quando revisitarmos este componente no futuro ou se outro membro do time quiser usá-lo, ficará fácil de entender o que ele precisa receber e o que faz.
+  - Servirão de documentação para o componente. Quando revisitarmos este componente no futuro ou se outro membro do time quiser utilizá-lo, ficará fácil de entender o que ele precisa receber e o que faz.
   - Irão garantir que estamos passando os dados corretamente, tornando mais fácil o diagnóstico de problemas.
   - No futuro, utilizaremos estas props para gerar uma documentação oficial do componente com react-docgen
 
@@ -86,13 +104,12 @@ Os passos a seguir fazem parte de um ciclo de desenvolvimento e podem ser aplica
       onClickCancel: func.isRequired,
       onHover: func.isRequired
   }
-
   ```
-  - Sempre iremos seguir esta ordem na desestruturação do objeto e declaração das propTypes:
-   Primeiro propriedades de estado do componente e depois callbacks (funções)
+  *OBS: Sempre iremos seguir esta ordem na desestruturação do objeto e declaração das propTypes:
+   Primeiro propriedades de estado do componente e depois callbacks (funções)*
 
   ### 1.2.2 defaultProps
-  *Todas* as props que não forem required devem especificar uma defaultProp
+  **Todas** as props que não forem required devem especificar uma defaultProp
   Utilize este recurso para tornar mais prático o uso de seus componentes
   ```js
   SearchInput.propTypes = {
@@ -105,7 +122,7 @@ Os passos a seguir fazem parte de um ciclo de desenvolvimento e podem ser aplica
   Até o momento, não escrevemos o código dos componentes propriamente ditos, apenas estabelecemos
   a divisão lógica entre os diversos componentes e quais parâmetros cada um pode receber.
   Contudo, já temos em mãos como esperamos que o componente se comporte quando submetido a diferentes parâmetros
-  (pois temos em mãos os wireframes), então é uma ótima oportunidade para aplicar o `TDD`
+  (pois temos em mãos os wireframes/mockups), então é uma ótima oportunidade para aplicar o `TDD`
   ## 2.1 Test Drive Development (TDD) para interface gráfica
   Começaremos escrevendo todas as estórias do nosso componente:
 
@@ -158,13 +175,13 @@ Os passos a seguir fazem parte de um ciclo de desenvolvimento e podem ser aplica
   (Por exemplo a estória #3, onde não há nada nada busca mas existem resultados)
 
   As vantagens de se usar o storybook são inúmeras:
-   - Ambiente rápido de desenvolvimento (HMR)
-   - Você poderá testar se seus componentes estão se comportando como esperado
-   - Poderá alternar entre os diferentes casos de uso de maneira rápida
-   - Irá gerar um catálogo de componentes que será útil para você no futuro e para sua equipe
-   - Irá garantir que o componente está chamando corretamente as funções (emitindo os eventos necessários e com os parâmetros corretos)
+   - Ambiente rápido de desenvolvimento (HMR).
+   - Você poderá testar se seus componentes estão se comportando como esperado.
+   - Poderá alternar entre os diferentes casos de uso de maneira rápida.
+   - Irá gerar um catálogo de componentes que será útil para você no futuro e para sua equipe.
+   - Irá garantir que o componente está chamando corretamente as funções (emitindo os eventos necessários e com os parâmetros corretos).
 
-Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar sobre estilização
+Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar sobre estilização.
 
   ## 2.2 Estilização
 
@@ -200,10 +217,10 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
       onMouseLeave,
   }) => (
     <Container onMouseEnter={onHover} onMouseLeave={onMouseLeave}>
+      <SearchIcon active={hovered} />
       <InputWrapper>
         <Input value={text} onChange={e => onChangeText(e.target.value)} />
       </InputWrapper>
-      <SearchIcon active={hovered} />
       <ResultsCountChip count={resultsCount}/>
       <CancelButton onClick={onClickCancel} resultsCount={resultsCount} />
     </Container>
@@ -221,12 +238,12 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   ```
 
   O único caso em que iremos declarar classes diretamente no css é caso precisemos utilizar o ReactCSSTransitionGroup, que depende de classes globais.
-  Fora isso, todo o estilo estará escopado por componente, fazendo com que ele se torne verdadeiramente um componente autosuficiente, que irá se comportar da mesma maneira
-  independente do contexto em que for inserido.
+  Fora isso, todo o estilo estará escopado por componente, fazendo com que ele se torne verdadeiramente um componente autosuficiente, que irá se comportar da mesma maneira independente do contexto em que for renderizado.
+
   Algumas vantagens em utilizar o styled-components
-   - É muito mais fácil calcular estilos condicionais desta maneira do que com classes
-   - O estilo fica escopado para o componente, evitando estilos globais
-   - Diferentemente de Inline-Styles, é possível utilizar outros recursos de css como media-queries e pseudo-seletores
+   - É muito mais fácil calcular estilos condicionais desta maneira do que com classes.
+   - O estilo fica escopado para o componente, evitando estilos globais.
+   - Diferentemente de Inline-Styles, é possível utilizar outros recursos de css como media-queries e pseudo-seletores.
 
   E como reaproveitaremos estilos?
 
@@ -234,14 +251,14 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   O que faremos é o reaproveitamnete de Components
   Vamos supor que todos nossos componentes de texto tenham estas propriedades
 
-  Ao invez de criarmos uma classe global ou mesmo aplicar estes
-  estilos em um escopo ainda mais genérico (body, por exemplo), iremos criar um componente Text
-
-  ```css
+  ```
    color: red;
    font-size: 16px;
    font-family: Nunito Sans;
   ```
+
+  Ao invez de criarmos uma classe global ou mesmo aplicar estes
+  estilos em um escopo ainda mais genérico (body, por exemplo), iremos criar um componente Text
 
   ```jsx
    const Text = styled.span`
@@ -251,7 +268,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
      `
   ```
 
-  E sempre que precisarmos destas características, importaremos o componente `Text`e o utilizaremos.
+  E sempre que precisarmos destas características, importaremos o componente `Text` e o utilizaremos.
   E caso precisemos criar componentes que tem como base as características de `Text`,
   porém com customizações? É simples
 
@@ -368,7 +385,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   O `Apollo` será responsável por trazer para o client todos os dados que necessários e que estejam necessariamente no backend (não são dados de estado local,
   como por exemplo qual filtro está selecionado)
 
-  # 5.2 Mutations
+  ## 5.2 Mutations
   Todas as operações (create, remove, update, etc) que precisem ser feitas no servidor serão disparadas pelo client
   através de mutations *(Mais sobre este tópico no futuro)
 
@@ -381,7 +398,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   - etc...
 
 
-## 6. Actions e Reducers
+# 6. Actions e Reducers
   *Em breve...*
-## 7. Containers
+# 7. Containers
   *Em breve...*
