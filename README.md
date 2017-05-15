@@ -418,7 +418,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   
   
 
-  Algumas vantagens de usar GraphQL + Apollo ao invez de modelos mais convenciais como por exemplo REST:
+  Algumas vantagens de usar GraphQL + Apollo ao invés de modelos mais convenciais como por exemplo REST:
   - Você pode consultar os dados da maneira que quiser, especificando as relations e quais campos quer de cada objeto
   - Caching
   - É declarativo, consistente com todo o resto do nosso ambiente
