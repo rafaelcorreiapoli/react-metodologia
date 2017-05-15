@@ -116,7 +116,7 @@ Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos de a
   **Todas** as props que não forem required devem especificar uma defaultProp
   Utilize este recurso para tornar mais prático o uso de seus componentes
   ```js
-  SearchInput.propTypes = {
+  SearchInput.defaultProps = {
       resultsCount: 0
   }
   ```
