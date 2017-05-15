@@ -1,4 +1,4 @@
-# Metodologia para projetos React (web e native)
+# Metodologia para desenvolvimento de projetos em React (web e native)
 Uma metodologia que estou desenvolvendo com base em aprendizados nos diversos projetos que realizei.
 
 As estratégias seguidas neste modelo também são fruto de muitas pesquisas e se baseiam no uso de bibliotecas modernas, seguindo todas as melhores práticas de desenvolvimento web moderno.
