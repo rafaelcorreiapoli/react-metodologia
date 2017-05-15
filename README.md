@@ -15,10 +15,7 @@ Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos em d
 
 ![Overview](https://raw.githubusercontent.com/rafaelcorreiapoli/react-metodologia/master/images/Overview.png)
 
-
-# 1. Componentes Visuais
-
-## 1.1 Divisão de componentes visuais (stateless/dumb components)
+# 1. Definição dos componentes visuais
   Tendo em mãos os wireframes/mockups que contenham todos os elementos (e a representação de suas funcionalidades) que serão desenvolvidos nesta iteração, iremos realizar a divisão deles em componentes visuais.
   É nesta hora que iremos estabelecer componentes como:
   - SearchInput
@@ -29,8 +26,11 @@ Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos em d
   - etc...
 
   Procuraremos estabelecer um nível de granularidade que evite completamente repetições (DRY) mas ao mesmo tempo tenha foco em praticidade.
-  Por exemplo, nosso input de busca pode ter diversos elementos:
+  Vamos assumir que, nos wireframes recebidos da equipe de Design, temos o seguinte componente
 
+  ![Overview](https://raw.githubusercontent.com/rafaelcorreiapoli/react-metodologia/master/images/SearchInput.png)
+
+  Conseguimos extrair desta imagem os seguintes sub-componentes:
   - Icone de search **(1)**
   - Input **(2)**
   - Chip com a quantidade de resultados **(3)**
@@ -77,7 +77,7 @@ Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos em d
     )
   ```
 
-  ### 1.2.1 propTypes
+### 1.2.1 propTypes
   É de extrema importância que sejam escritos os PropTypes. Eles nos ajudaram em diversos pontos:
   - Servirão de documentação para o componente. Quando revisitarmos este componente no futuro ou se outro membro do time quiser utilizá-lo, ficará fácil de entender o que ele precisa receber e o que faz.
   - Irão garantir que estamos passando os dados corretamente, tornando mais fácil o diagnóstico de problemas.
@@ -112,7 +112,7 @@ Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos em d
   *OBS: Sempre iremos seguir esta ordem na desestruturação do objeto e declaração das propTypes:
    Primeiro propriedades de estado do componente e depois callbacks (funções)*
 
-  ### 1.2.2 defaultProps
+### 1.2.2 defaultProps
   **Todas** as props que não forem required devem especificar uma defaultProp
   Utilize este recurso para tornar mais prático o uso de seus componentes
   ```js
@@ -358,8 +358,11 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   Utilizaremos o `Apollo` como client de GraphQL.
 
   ## 5.1 Queries
-  Provavelmente, os componentes de lista de Todos (TodoList) que desenhamos na primeira fase estão esperando um array de objetos Todo.
-  É bem fácil popular uma lista dessa com um client de GraphQL
+  Vamos assumir que recebemos da equipe de design o seguinte componente:
+  ![Overview](https://raw.githubusercontent.com/rafaelcorreiapoli/react-metodologia/master/images/TodoList.png)
+
+  Provavelmente, os componentes desta lista (TodoList) que desenhamos na primeira fase estão esperando um array de objetos Todo.
+  É bem fácil popular a nossa lista com um client de GraphQL
   ```js
   const query = gql`
     query todos {
@@ -419,5 +422,9 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
 
 # 6. Actions e Reducers
   *Em breve...*
-# 7. Containers
+
+# 7. Testes
+  *Em breve...*
+
+# 8. Containers
   *Em breve...*
