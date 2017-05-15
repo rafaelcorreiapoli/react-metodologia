@@ -54,9 +54,12 @@ Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos em d
 
 ## 1.2 Props
   É neste momento também que estabeleceremos, olhando para nossos wireframes/mockups, quais Props cada stateless component irá receber.
+
   Neste momento, não economize em props: Absolutamente **todos**
   os parâmetros que descrevem o estado do componente e os eventos que ele pode emitir devem ser levados
-  em consideração. Até mesmo estados "superficiais" como por exemplo *hover* (Veremos nos mais adiante como otimizá-los)
+  em consideração.
+
+  Até mesmo estados "superficiais" como por exemplo *hover* (Veremos nos mais adiante como otimizá-los)
 
   ```js
     const SearchInput = ({
