@@ -30,10 +30,11 @@ Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos em d
 
   Procuraremos estabelecer um nível de granularidade que evite completamente repetições (DRY) mas ao mesmo tempo tenha foco em praticidade.
   Por exemplo, nosso input de busca pode ter diversos elementos:
-    - Icone de search **(1)**.
-    - Input **(2)**.
-    - Chip com a quantidade de resultados **(3)**.
-    - Botão de cancel **(4)**.
+
+  - Icone de search **(1)**
+  - Input **(2)**
+  - Chip com a quantidade de resultados **(3)**
+  - Botão de cancel **(4)**
 
   Cada um destes (**1**, **2**, **3**, **4**), apesar de bem granulares, merecem ser um componente.
   Com isto, conseguiremos reutilizar estes mesmos elementos em outros contextos, caso seja preciso.
