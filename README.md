@@ -125,8 +125,10 @@ Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos em d
 # 2. Storybook
   Até o momento, não escrevemos o código dos componentes propriamente ditos, apenas estabelecemos
   a divisão lógica entre os diversos componentes e quais parâmetros cada um pode receber.
+
   Contudo, já temos em mãos como esperamos que o componente se comporte quando submetido a diferentes parâmetros
   (pois temos em mãos os wireframes/mockups), então é uma ótima oportunidade para aplicar o `TDD`
+
   ## 2.1 Test Drive Development (TDD) para interface gráfica
   Começaremos escrevendo todas as estórias do nosso componente:
 
@@ -286,10 +288,13 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
 # 3. Routes e Pages
   Neste momento teremos todos os componentes visuais criados, testados e documentados,
   apenas esperando para receber os dados e funções vindas dos containers.
+
   Porém há alguns passos antes de chegarmos no que propriamente vai ditar a lógica da nossa aplicação
-  Nesta fase, criaremos as rotas envolvidas nesta iteração utilizado o `react-router v4`
+  Nesta fase, criaremos as rotas envolvidas nesta iteração utilizando o `react-router v4`.
   Criaremos também uma outra categoria de componentes: as `Pages`
+
   Nossas routes irão sempre desenhar Pages, e por mais que a Page tenha apenas um componente (um Container, por exemplo), é importante criar esta camada.
+
   A vantagem é que, criando esta interface entre o container e a rota, não estaremos acoplando o nosso container com como a rota trata os params da rota, por exemplo
   ```js
   const SearchPage = ({
@@ -308,21 +313,24 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   ```
   Neste exemplo nosso `SearchContainer` recebe o categoryId, e no nosso caso de uso este categoryId está na rota (por exemplo `/search/:categoryId`)
   O papel do `SearchPage`, neste caso, é ler do match.params (específico do nosso Router) o categoryId e repassar para o componente.
+
   Sendo assim, nosso 'SearchContainer' não está atrelado a nosso Router e pode ser utilizado em outros contextos, por exemplo com o categoryId vindo de outra fonte de dados
 
 
 # 4. State shape
-  Neste passo, iremos analisar as funcionalidades e casos de uso para determinar o **mínimo** que devemos guardar na nossa store para representar o estado da aplicação
-  Por que **mínimo** ? Não devemos guardar valores computados, pois estes devem ser calculados e repassados para os componentes nos Containers. Veremos mais sobre este assunto
-  no tópico sobre Containers.
+  Neste passo, iremos analisar as funcionalidades e casos de uso para determinar o **mínimo** que devemos guardar na nossa store para representar o estado da aplicação.
+
+  Por que **mínimo** ? Não devemos guardar valores computados, pois estes devem ser calculados e repassados para os componentes nos Containers. Veremos mais sobre este assunto no tópico sobre Containers.
+
   Mas, para exemplificar, vamos imaginar que estamos fazendo uma calculadora que mostra o resultado da multiplicação de dois números, o número **a** e o número **b**
   O resultado da multiplicação, que chamaremos de  **c**, não precisa e não deve ser guardado na nossa store, pois ele é um valor computado a partir de outros valores,
-  no caso, **c = a * b**
+  no caso, **c = a * b**.
+
   Nesta fase, não devemos nos preocupar com o estado referente à dados buscados do backend (por exemplo os posts do usuário) pois, como veremos a seguir, este tipo
-  de estado será gerenciado pelo nosso client de GraphQL
+  de estado será gerenciado pelo nosso client de GraphQL.
   Pense apenas em estados locais, como por exemplo qual filtro está selecionado, itens em um carrinho de compras, formulários*, etc
 
-  * *Caso você opte por utilizar o `redux-form` (recomendado), você não precisará se preocupar com estado referente à forms.*
+  * (\*): Caso você opte por utilizar o `redux-form` (recomendado), você não precisará se preocupar com estado referente à forms.*
 
   Lembra-se quando conversamos sobre estados efêmeros, que não importam para o resto da aplicação? Neste momento, tendo uma visão mais geral do nosso State shape, é a hora
   de decidir quais partes do estado da nossa aplicação podem ser gerenciados localmente no componente e não na store do redux. Por exemplo, se um componente muda de cor
