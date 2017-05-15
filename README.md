@@ -336,7 +336,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   de decidir quais partes do estado da nossa aplicação podem ser gerenciados localmente no componente e não na store do redux.
 
   Por exemplo, se um componente muda de cor
-  ao sofrer um hover e nenhum outro componente do nosso app precisa ficar sabendo disto, encontramos um bom estado candidato a ser transferido para um estado local
+  ao sofrer um hover e nenhum outro componente do nosso app precisa ficar sabendo disto, encontramos um bom candidato a ser transferido para um estado local.
   Porém não queremos modificar nossos componentes stateless criados na primeira fase (transformando-os em classes, capazes de ter estado).
 
   Para resolver este problema, utilizaremos a biblioteca `recompose`, criando `enhancers` que darão capacidade a nossos componentes de terem um estado
