@@ -342,12 +342,14 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   Para resolver este problema, utilizaremos a biblioteca `recompose`, criando `enhancers` que darão capacidade a nossos componentes de terem um estado
 
   ```js
-  const enhanceWithHover = withState('hovered', 'setHovered', false)
-  const withHandlers = ({
+  import { withState, withHandlers, compose } from 'recompose'
+  
+  const withHoverState = withState('hovered', 'setHovered', false)
+  const withHoverHandlers = ({
     onMouseOver: ({ setHover }) => () => setHover(true)
     onMouseOut: ({ setHover }) => () => setHover(false)
   })
-
+  const enhanceWithHover = compose(withHoverState, withHoverHandlers)
   const SearchInputWithHover = enhanceWithHover(SearchInput)
   ```
   Pronto, agora nosso componente `SearchInputWithHover` é um `SearchInput` mas com capacidades de gerenciar e modificar seu estado em relação ao hover (:
