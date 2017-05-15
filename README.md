@@ -330,13 +330,17 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   de estado será gerenciado pelo nosso client de GraphQL.
   Pense apenas em estados locais, como por exemplo qual filtro está selecionado, itens em um carrinho de compras, formulários*, etc
 
-  * (\*): Caso você opte por utilizar o `redux-form` (recomendado), você não precisará se preocupar com estado referente à forms.*
+  (\*) *Caso você opte por utilizar o `redux-form` (recomendado), você não precisará se preocupar com estado referente à forms.*
 
   Lembra-se quando conversamos sobre estados efêmeros, que não importam para o resto da aplicação? Neste momento, tendo uma visão mais geral do nosso State shape, é a hora
-  de decidir quais partes do estado da nossa aplicação podem ser gerenciados localmente no componente e não na store do redux. Por exemplo, se um componente muda de cor
+  de decidir quais partes do estado da nossa aplicação podem ser gerenciados localmente no componente e não na store do redux.
+
+  Por exemplo, se um componente muda de cor
   ao sofrer um hover e nenhum outro componente do nosso app precisa ficar sabendo disto, encontramos um bom estado candidato a ser transferido para um estado local
-  Porém não queremos modificar nossos componentes stateless criados na primeira fase (transformando-os em classes, capazes de ter estado)
+  Porém não queremos modificar nossos componentes stateless criados na primeira fase (transformando-os em classes, capazes de ter estado).
+
   Para resolver este problema, utilizaremos a biblioteca `recompose`, criando `enhancers` que darão capacidade a nossos componentes de terem um estado
+
   ```js
   const enhanceWithHover = withState('hovered', 'setHovered', false)
   const withHandlers = ({
@@ -372,11 +376,13 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
 
   const ListWithData = graphql(query)(TodoList) //*
   ```
-  OBS: *O componente ListWithData é considerado um `Container`, mas não é um `Container` completo para nossa aplicação pois ele não interage com o estado local,
-  no tópico sobre containers, iremos completar a metade que falta deste componente para que ele possa, através do connect do redux, receber props que estão guardadas
+  OBS: *O componente ListWithData é considerado um `Container`, mas não é um `Container` completo para nossa aplicação pois ele não interage com o estado local.
+
+  No tópico sobre containers, iremos completar a metade que falta deste componente para que ele possa, através do connect do redux, receber props que estão guardadas
   no estado local (mapStateToProps) e poder dispachar ações que modifiquem o estado local (mapDispatchToProps)*
 
-  O ideal é que o componente esteja esperando exatamente o mesmo formato de dados que está descrito na nossa schema de GraphQL
+  O ideal é que o componente esteja esperando exatamente o mesmo formato de dados que está descrito na nossa schema de GraphQL.
+
   Caso precise tratar os dados antes de passá-los para o componente, utilize as `queryOptions` do Apollo.
   Por exemplo, supondo que nosso componente TechnologiesList e TechnologiesListItem esperem que a cor esteja na raiz do objeto de tecnologia
   (eles não sabem da existência da key `tag`), podemos tratar os dados da seguinte maneira:
@@ -394,8 +400,9 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   ```
 
   É recomendado também o uso de `fragments` para evitar repetição. *(Mais sobre este tópico no futuro)*
+
   O `Apollo` será responsável por trazer para o client todos os dados que necessários e que estejam necessariamente no backend (não são dados de estado local,
-  como por exemplo qual filtro está selecionado)
+  como por exemplo qual filtro está selecionado).
 
   ## 5.2 Mutations
   Todas as operações (create, remove, update, etc) que precisem ser feitas no servidor serão disparadas pelo client
