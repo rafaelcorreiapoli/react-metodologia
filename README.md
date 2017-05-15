@@ -13,7 +13,7 @@ de desenvolvimento de projeto.
 
 Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos em de antemão uma lista de tarefas/funcionalidades a serem desenvolvidas nesta iteração.
 
-[imagem]
+![Overview](https://raw.githubusercontent.com/rafaelcorreiapoli/metodologia-react/master/images/Overview.png)
 
 
 # 1. Componentes Visuais
