@@ -11,7 +11,7 @@ Seguiremos uma série de passos tendo como objetivo o desenvolvimento de uma det
 A imagem a seguir mostra uma visão macro do processo. Nela, assumimos que a equipe está utilizando o SCRUM como framework
 de desenvolvimento de projeto.
 
-Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos em de antemão uma lista de tarefas/funcionalidades a serem desenvolvidas nesta iteração.
+Esta metodologia poderia ser aplicada em outros modelos, desde que tenhamos de antemão uma lista de tarefas/funcionalidades a serem desenvolvidas nesta iteração.
 
 ![Overview](https://raw.githubusercontent.com/rafaelcorreiapoli/react-metodologia/master/images/Overview.png)
 
