@@ -411,7 +411,12 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
 
   ## 5.2 Mutations
   Todas as operações (create, remove, update, etc) que precisem ser feitas no servidor serão disparadas pelo client
-  através de mutations *(Mais sobre este tópico no futuro)
+  através de mutations
+  
+  *Mais sobre este assunto em breve...*
+  
+  
+  
 
   Algumas vantagens de usar GraphQL + Apollo ao invez de modelos mais convenciais como por exemplo REST:
   - Você pode consultar os dados da maneira que quiser, especificando as relations e quais campos quer de cada objeto
