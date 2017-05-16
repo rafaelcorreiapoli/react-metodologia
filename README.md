@@ -456,3 +456,9 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   - [linter-eslint](https://atom.io/packages/linter-eslint "linter-eslint")
   - [language-graphql](https://atom.io/packages/language-graphql "language-graphql")
   - [language-babel](https://atom.io/packages/language-babel "language-babel")
+
+  ## 9.2. Plugins para Babel
+  - [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver)
+  
+  ## 9.3 Plugins para Webpack
+  - [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)
