@@ -470,3 +470,13 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   ## 9.5 Deploy
   - [surge.sh](http://surge.sh/)
   - [now](https://zeit.co/now)
+  
+  ## 9.6 Plugins para o Chrome
+  - [Apollo Client Developer Tools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm)
+  - [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+  - [React Perf](https://chrome.google.com/webstore/detail/react-perf/hacmcodfllhbnekmghgdlplbdnahmhmm)
+  - [Redux Devtools](https://github.com/zalmoxisus/redux-devtools-extension)
+  - [Wappalyzer](https://wappalyzer.com/)
+  - [What Font?](http://www.chengyinliu.com/whatfont.html)
+  - [ColorZilla](https://chrome.google.com/webstore/detail/colorzilla/bhlhnicpbhignbdhedgjhgdocnmhomnp)
+  - [CSSViewer](https://chrome.google.com/webstore/detail/cssviewer/ggfgijbpiheegefliciemofobhmofgce)
