@@ -6,13 +6,13 @@ As estratégias seguidas neste modelo também são fruto de muitas pesquisas e s
 Os passos a seguir fazem parte de um ciclo de desenvolvimento e podem ser aplicados de uma vez para o projeto todo ou subdivindo o projeto em pequenas entregas (iterações)
 
 # Bibliotecas utilizadas
-- [React](https://facebook.github.io/react/ "React")
-- [Redux](http://redux.js.org/ "Redux")
-- [GraphQL](http://graphql.org/learn/ "GraphQL")
-- [Apollo](http://dev.apollodata.com/react/ "Apollo")
-- [Immutable](https://facebook.github.io/immutable-js/ "Immutable")
-- [Reselect](https://github.com/reactjs/reselect "Reselect")
-- [Styled Components](https://styled-components.com/ "Styled Components")
+- [React](https://facebook.github.io/react/ "React") - Construção da interface gráfica
+- [Redux](http://redux.js.org/ "Redux") - Gerenciamento de estado
+- [GraphQL](http://graphql.org/learn/ "GraphQL") - Uma linguagem para realizar consultas em grafos
+- [Apollo](http://dev.apollodata.com/react/ "Apollo") - Client de GraphQL
+- [Immutable](https://facebook.github.io/immutable-js/ "Immutable") - Estruturas de dados imutáveis
+- [Reselect](https://github.com/reactjs/reselect "Reselect") - Function memoization
+- [Styled Components](https://styled-components.com/ "Styled Components") - Estilização de componentes React
 
 # Overview
 Seguiremos uma série de passos tendo como objetivo o desenvolvimento de uma determinada funcionalidade para nosso software.
