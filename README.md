@@ -462,3 +462,11 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   
   ## 9.3 Plugins para Webpack
   - [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)
+  
+  ## 9.4 Produtividade
+  - [Toggl](https://toggl.com/) - Marcar horas trabalhadas (instalar plugin para o Chrome)
+  - [Waffle.io](https://waffle.io/) - Kanban board integrado com o github
+  
+  ## 9.5 Deploy
+  - [surge.sh](http://surge.sh/)
+  - [now](https://zeit.co/now)
