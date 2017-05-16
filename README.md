@@ -445,3 +445,14 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
 
 # 8. Containers
   *Em breve...*
+  
+  
+# 9. Extras
+  ## 9.1. Plugins para o Atom
+  
+  - [Nuclide](https://nuclide.io/ "Nuclide")
+  - [autocomplete-modules](https://atom.io/packages/autocomplete-modules "autocomplete-modules")
+  - [file-icons](https://atom.io/packages/file-icons "file-icons")
+  - [linter-eslint](https://atom.io/packages/linter-eslint "linter-eslint")
+  - [language-graphql](https://atom.io/packages/language-graphql "language-graphql")
+  - [language-babel](https://atom.io/packages/language-babel "language-babel")
