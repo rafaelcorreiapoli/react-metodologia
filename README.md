@@ -13,6 +13,8 @@ Os passos a seguir fazem parte de um ciclo de desenvolvimento e podem ser aplica
 - [Immutable](https://facebook.github.io/immutable-js/ "Immutable") - Estruturas de dados imutáveis
 - [Reselect](https://github.com/reactjs/reselect "Reselect") - Function memoization
 - [Styled Components](https://styled-components.com/ "Styled Components") - Estilização de componentes React
+- [Recompose](https://github.com/acdlite/recompose "Recompose") - Utilitários para React funcional
+- [Redux Actions](https://github.com/acdlite/redux-actions "Redux Actions) - Utilitários para lidar com Standard Flux Actions
 
 # Overview
 Seguiremos uma série de passos tendo como objetivo o desenvolvimento de uma determinada funcionalidade para nosso software.
