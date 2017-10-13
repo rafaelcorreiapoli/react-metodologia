@@ -353,7 +353,7 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
 
   ```js
   import { withState, withHandlers, compose } from 'recompose'
-  
+
   const withHoverState = withState('hovered', 'setHovered', false)
   const withHoverHandlers = ({
     onMouseOver: ({ setHover }) => () => setHover(true)
@@ -422,11 +422,11 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
   ## 5.2 Mutations
   Todas as operações (create, remove, update, etc) que precisem ser feitas no servidor serão disparadas pelo client
   através de mutations
-  
+
   *Mais sobre este assunto em breve...*
-  
-  
-  
+
+
+
 
   Algumas vantagens de usar GraphQL + Apollo ao invés de modelos mais convenciais como por exemplo REST:
   - Você pode consultar os dados da maneira que quiser, especificando as relations e quais campos quer de cada objeto
@@ -476,19 +476,19 @@ Os selectors são as funções responsáveis por extrair os dados da nossa store
 Vamos imaginar que temos a seguinte estrutura de dados na nossa store:
 ```js
 {
-	todos: {
-		todo1: {
-			text: 'This is the first todo',
-			done: false
-		},	
-		todo2: {
-			text: 'This is the second todo',
-			done: true
-		}
-	}
+  todos: {
+    todo1: {
+      text: 'This is the first todo',
+      done: false
+    },
+    todo2: {
+      text: 'This is the second todo',
+      done: true
+    }
+  }
 }
 ```
-	
+
 Porém, nosso dumb component `TodosList` precisa receber um `Array` de ToDos para serem renderizados, e não um mapa.
 Vamos criar um selector que fará a transformação dos dados de maneira apropriada:
 ```js
@@ -497,8 +497,8 @@ const getTodosMap = state => state.todos
 
 ```js
 const getTodosArrayFromMap = todosMap => Object.keys(todosMap).map(todoKey => ({
-	id: todoKey,
-	...todosMap[todoKey]
+  id: todoKey,
+  ...todosMap[todoKey]
 }))
 ```
 
@@ -526,8 +526,9 @@ Com ela, nosso selector ficaria assim:
 
 ```js
 const getTodosArray = createSelector(
-	getTodosMap,
-	todosMap => getTodosArrayFromMap(todosMap)
+  getTodosMap,
+  todosMap => getTodosArrayFromMap(todosMap)
+)
 ```
 
 ```js
@@ -540,10 +541,10 @@ Agora, caso a função `getTodosMap` retorne um mesmo valor para dois valores de
 
 # 9. Containers
 *Em construção...*
-  
+
 # 10. Extras
-  ## 9.1. Plugins para o Atom
-  
+  ## 10.1. Plugins para o Atom
+
   - [Nuclide](https://nuclide.io/ "Nuclide")
   - [autocomplete-modules](https://atom.io/packages/autocomplete-modules "autocomplete-modules")
   - [file-icons](https://atom.io/packages/file-icons "file-icons")
@@ -551,21 +552,21 @@ Agora, caso a função `getTodosMap` retorne um mesmo valor para dois valores de
   - [language-graphql](https://atom.io/packages/language-graphql "language-graphql")
   - [language-babel](https://atom.io/packages/language-babel "language-babel")
 
-  ## 9.2. Plugins para Babel
+  ## 10.2. Plugins para Babel
   - [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver)
-  
-  ## 9.3 Plugins para Webpack
+
+  ## 10.3 Plugins para Webpack
   - [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)
-  
-  ## 9.4 Produtividade
+
+  ## 10.4 Produtividade
   - [Toggl](https://toggl.com/) - Marcar horas trabalhadas (instalar plugin para o Chrome)
   - [Waffle.io](https://waffle.io/) - Kanban board integrado com o github
-  
-  ## 9.5 Deploy
+
+  ## 10.5 Deploy
   - [surge.sh](http://surge.sh/)
   - [now](https://zeit.co/now)
-  
-  ## 9.6 Plugins para o Chrome
+
+  ## 10.6 Plugins para o Chrome
   - [Apollo Client Developer Tools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm)
   - [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
   - [React Perf](https://chrome.google.com/webstore/detail/react-perf/hacmcodfllhbnekmghgdlplbdnahmhmm)
@@ -574,3 +575,6 @@ Agora, caso a função `getTodosMap` retorne um mesmo valor para dois valores de
   - [What Font?](http://www.chengyinliu.com/whatfont.html)
   - [ColorZilla](https://chrome.google.com/webstore/detail/colorzilla/bhlhnicpbhignbdhedgjhgdocnmhomnp)
   - [CSSViewer](https://chrome.google.com/webstore/detail/cssviewer/ggfgijbpiheegefliciemofobhmofgce)
+
+  ## 10.7 Snippets
+    - [Atom Snippets](https://github.com/rafaelcorreiapoli/atom-snippets)
