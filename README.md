@@ -438,16 +438,110 @@ Neste momento, iremos de fato escrever nosso componente, mas antes, vamos falar 
 
 
 # 6. Actions e Reducers
-  *Em breve...*
+
+O `Redux`, apesar suas inúmeras vantagens, é muito verboso.
+O que podemos fazer para melhorá-lo neste aspecto?
+
+Iremos utilizar a biblioteca `redux-actions` para nos ajudar com os `actionCreators` e `reducers`
+Para entender melhor sua utilização, basta ler a [Documentação](https://redux-actions.js.org/docs/introduction/Motivation.html)
+
+*Em construção...*
 
 # 7. Testes
-  *Em breve...*
+Para escrever nossos testes, recomendo a utilização do [Jest](https://facebook.github.io/jest/docs/en/getting-started.html).
 
-# 8. Containers
-  *Em breve...*
+Mas antes, qual a importância de escrever bons testes para o desenvolvimento do projeto?
+O motivo mais óbvio é a garantia de que nosso software funciona, mas existem outras vantagens um pouco menos perceptíveis
+
+- Novos integrantes da equipe poderão começar a contribuir para um projeto já existente com mais confiança e velocidade, pois eles terão a garantia (quase sempre) de que seu código não irá quebrar nada em produção.
+- Os testes servem como documentação do comportamento de nosso software. Tanto para novos integrantes da equipe quanto para os integrantes que ficaram algum tempo distante de certas partes do código.
+- Permitem refatorações de partes do código com mais velocidade (pois você consegue identificar exatamente o que não funciona e aonde arrumar) e confiança (pois você sabe que, se após a refatoração os testes continuarem passando, tudo funciona novamente como esperado)
+
+Por estes e outros motivos, é extremamente importante que seja investido o tempo necessário para implementação de testes em todas as fases do projeto.
+
+Os arquivos de testes devem ser colocados próximos aos arquivos sendo testados, por exemplo:
+`src/modules/todos/reducer.js` -> `src/modules/todos/__tests__/reducer.spec.js`
+*Em construção...*
+
+### 7.1 Testes unitários
+Para testar nossos `reducers`, `selectors` e `actionCreators`, iremos utilizars o [redux-testkit](https://github.com/wix/redux-testkit) para nos ajudar. Ele irá reduzir consideravelmente o boilerplate necessário para testar essa camada da aplicação.
+*Em construção...*
+
+### 7.2 Testes de UI
+Iremos utilizar o [enzyme](https://github.com/airbnb/enzyme) e o [enzyme-to-json](https://github.com/adriantoine/enzyme-to-json)
+*Em construção...*
+
+# 8. Selectors
+Os selectors são as funções responsáveis por extrair os dados da nossa store e transformá-los de alguma maneira que é mais interessante para a nossa View.
+Vamos imaginar que temos a seguinte estrutura de dados na nossa store:
+```js
+{
+	todos: {
+		todo1: {
+			text: 'This is the first todo',
+			done: false
+		},	
+		todo2: {
+			text: 'This is the second todo',
+			done: true
+		}
+	}
+}
+```
+	
+Porém, nosso dumb component `TodosList` precisa receber um `Array` de ToDos para serem renderizados, e não um mapa.
+Vamos criar um selector que fará a transformação dos dados de maneira apropriada:
+```js
+const getTodosMap = state => state.todos
+```
+
+```js
+const getTodosArrayFromMap = todosMap => Object.keys(todosMap).map(todoKey => ({
+	id: todoKey,
+	...todosMap[todoKey]
+}))
+```
+
+Agora, podemos obter o `Array` de ToDos a partir do `state`:
+
+```js
+const todosArray = getTodosArrayFromMap(getTodosMap(state))
+```
+
+E esta função será utilizada em nossos containers, que serão explicados com mais detalhe no próximo capítulo.
+
+Mas antes, vamos pensar um pouco sobre um assunto importante: Performance.
+
+Toda vez que alguma mudança de estado causar a rerenderização deste componente (o Container, que usa o selector), a função getTodosArray será chamada novamente e irá consumir os recursos computacionais necessários para sua execução, mesmo que o subset do state utilizado por esta função não tenha mudado e que o resultado da computação seja o mesmo.
+
+Muitas vezes, não temos como evitar a rerenderização do componente, porém, podemos otimizar a computação da função através da [memoization](https://en.wikipedia.org/wiki/Memoization).
+
+A idéia básica é, dada uma função pura (para o mesmo input X temos o mesmo output Y, sem side-effects), podemos fazer um cache do resultado Y, evitando a recomputação da função para um mesmo input X.
+
+O caso descrito acima é um exemplo de onde podemos aplicar este conceito e temos uma biblioteca pronta para implementar memoization em JS:
+[reselect](https://github.com/reactjs/reselect)
+
+Com ela, nosso selector ficaria assim:
+
+
+```js
+const getTodosArray = createSelector(
+	getTodosMap,
+	todosMap => getTodosArrayFromMap(todosMap)
+```
+
+```js
+const todosArray = getTodosArray(state)
+```
+
+Agora, caso a função `getTodosMap` retorne um mesmo valor para dois valores de `state`, a função `getTodosArrayFromMap` será chamada apenas uma vez (para a primeira computação, após isto o valor será cacheado e retornado diretamente, em uma espécie de short-circuit)
+
+
+
+# 9. Containers
+*Em construção...*
   
-  
-# 9. Extras
+# 10. Extras
   ## 9.1. Plugins para o Atom
   
   - [Nuclide](https://nuclide.io/ "Nuclide")
