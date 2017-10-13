@@ -577,4 +577,4 @@ Agora, caso a função `getTodosMap` retorne um mesmo valor para dois valores de
   - [CSSViewer](https://chrome.google.com/webstore/detail/cssviewer/ggfgijbpiheegefliciemofobhmofgce)
 
   ## 10.7 Snippets
-    - [Atom Snippets](https://github.com/rafaelcorreiapoli/atom-snippets)
+  - [Atom Snippets](https://github.com/rafaelcorreiapoli/atom-snippets)
